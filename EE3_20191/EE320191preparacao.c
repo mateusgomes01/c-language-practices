@@ -19,15 +19,15 @@ int main(){
   PROD produtoInput;
   NOTA notaInput;
   char opcao;
-  
+
   produto = fopen("produto.dat","wb");
   nota = fopen("nota.dat","wb");
-  
-  if( produto==NULL ){
-    printf("nao foi possivel abrir o arquivo!\n");
+
+  if( produto==NULL || nota==NULL ){
+    printf("nao foi possivel abrir 1 ou mais arquivos!\n");
     return 1;
   }
-  
+
   do{
     printf("Digite os dados dos produtos!\n");
     printf("Codigo produto: ");
@@ -36,15 +36,15 @@ int main(){
     scanf(" %s", produtoInput.nome);
     printf("Custo produto: ");
     scanf("%f", &(produtoInput.custo));
-    
+
     fwrite( &produtoInput, sizeof(produtoInput), 1, produto);
-    
+
     printf("Deseja escrever mais dados? (s/n)");
-    
+
     scanf(" %c", &opcao);
-    
+
   }while( opcao=='s' );
-  
+
   do{
     printf("Digite os dados das notas!\n");
     printf("Numero nota: ");
@@ -57,23 +57,17 @@ int main(){
     scanf(" %s", notaInput.data);
     printf("Preco unitario: ");
     scanf("%f", &(notaInput.precoUnitario));
-    
+
     fwrite( &notaInput, sizeof(notaInput), 1, nota);
-    
+
     printf("Deseja escrever mais dados? (s/n)");
-    
+
     scanf(" %c", &opcao);
-    
+
   }while( opcao=='s' );
-  
+
   fclose(produto);
   fclose(nota);
-  
+
   return 0;
 }
-
-
-
-
-
-
